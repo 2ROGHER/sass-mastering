@@ -1,0 +1,26 @@
+*,
+*::before,
+*::after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: serif;
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body > div {
+  max-width: 38rem;
+  margin: 0;
+}
+
+/*# sourceMappingURL=style.css.map */
