@@ -1,0 +1,33 @@
+// Here we are going to create our first (mixin)
+// This mixin allow us to  our current font-family and adjust all of
+//our values accordingly, so  so we always have the best line length and spacing for our current font
+@import "../style.scss";
+@import "./functions";
+
+@mixin base-font-family-sizing($current-font-family: $base-font-family) {
+    // 1.
+    // Check what $base-font-family we are using...
+    // If $base-font-family-serif we need to multiply
+    // our $base-font-size by 1.5 and increase
+    // our $base-font-line-height accordingly
+
+    // 2.
+    // Otherwise, a font-family we hanvent set
+    // specific values for has been set so we
+    // should leave the browser defaults in place.
+    font-family: $current-font-family;
+    line-height: $base-line-height;
+    margin-bottom: $base-font-size * $base-line-height;
+    // We can also update our mixin as follow:
+    font-size: base-font-size-calc();
+
+    // This returns the corect font-size value for the respective (base font family)
+    @if $current-font-family == $base-font-family-serif {
+        // content: "Serif";
+        // We need to change and create that really we need
+        font-size: $base-font-size * 1.15;
+    } @else {
+        // content: "Not serif";
+        font-size: $base-font-size;
+    }
+}

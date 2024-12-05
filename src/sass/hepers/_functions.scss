@@ -1,0 +1,70 @@
+// @function base-font-size-calc($current-font-family: $base-font-family) {
+//     // 1.
+//     // Calculate the $base-font-size based on
+//     // what the current $base-font-family is...
+//     @if $current-font-family == $base-font-family-serif {
+//         // If the family is serif, we need to  increase the font-size...
+//         @return $base-font-size * 1.15;
+//     } @else {
+//         // ...Otherwise, we can leave it at the default value...
+//         @return $base-font-size;
+//     }
+
+// }
+
+// Here we define the @function with if() function that simulated ternary operator
+@function base-font-size-calc($current-font-family: $base-font-family) {
+    // 1.
+    // Calculate the $base-font-size based on
+    // what the current $base-font-family is...
+    @return if($base-font-family == $base-font-family-serif, $base-font-size * 1.15, $base-font-size);
+}
+
+
+// We need to implement the second important funtion
+@function base-heading-sizes-calc($heading: 2) {// por defecto el valor que quremos (h2, h1, h3 o bien h4) es 2.
+    $h4-font-size: base-font-size-calc(); // we incokes the function to calculate the the base font size
+    $h1-font-size: $h4-font-size * 2;
+    $h2-font-size: $h1-font-size / 1.3333;
+    $h3-font-size: $h2-font-size / 1.2821;
+    $h4-font-size: $h3-font-size /  1.2048;
+    $h5-font-size: $h4-font-size / 1.2388;
+
+    // Now we need to know how crete a list
+    $headings: (
+        $h1-font-size,
+        $h2-font-size,
+        $h3-font-size,
+        $h4-font-size,
+        $h5-font-size,
+        $h6-font-size
+    );
+    // Now, to get the correct item from the list, we need to use the 
+    // nth() function, wich take to parameter(list, and index)
+    @return nth($headings, $heading);
+}
+
+// Now we need to calculate the (line-height) property for each element
+// De esta forma nosotros al cambiar de un tipo de h1, a h2, y h3 etc.
+// podemos usar el tamanio del texto del siguiente (heading) que se optinene como resultado
+// de la funcion anterior.
+@function base-heading-line-height($heading: 2) {
+    $h1-line-height: base-heading-sizes-calc(2);
+    $h2-line-height: base-heading-sizes-calc(3);
+    $h3-line-height: base-heading-sizes-calc(4);
+    $h4-line-height: base-heading-sizes-calc(5);
+    $h5-line-height: base-heading-sizes-calc(6);
+    $h6-line-height: base-heading-sizes-calc(6) / $h1-line-height;
+
+    // Let's create the list
+    $line-heights: (
+        $h1-line-height,
+        $h2-line-height,
+        $h3-line-height,
+        $h4-line-height,
+        $h5-line-height,
+        $h6-line-height
+    );
+
+    @return nth($line-heights, $heading);
+}

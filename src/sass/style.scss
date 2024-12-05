@@ -1,4 +1,25 @@
 // mastering-sass/ch02/scss/style.css
+// Here we need to create (mixins) to solve the problem with recurrent o repetitive values
+// Here i'm to defining the variables to use anywhere.
+$base-font-family-sans: sans-serif; //1
+$base-font-family-serif: serif; // 2
+$base-font-family-code: monospace; // 3
+
+$base-font-size: 1rem;
+$base-line-height: 1.5;
+
+// $base-font-family: $base-font-family-code;
+// Now we replace the $base-font-family variable to follow.
+$base-font-family: $base-font-family-serif; // This variable is sent to (_mixins.scss) file.
+
+// Import functions
+@import "./hepers/functions";
+// Import mixin
+@import "./hepers/mixins";
+
+// We define the variable to use into content variables.
+$name: "John Doue";
+
 *,
 *::before,
 *::after {
@@ -21,4 +42,51 @@ body > div {
     // We only want to get the "wrapper div"
     max-width: 38rem; // approx 600px
     margin: 0;
+}
+// Here we need to replace the variables value.
+p {
+    font-family: $base-font-family-sans;
+    line-height: $base-line-height;
+    font-size: $base-font-size;
+    // we need to use the font-sizes
+    margin-bottom: $base-line-height + rem; // We can also concatenate multiple values.
+    // Add our rem unit to make it 1.5rem
+    @include base-font-family-sizing(); // content: 'Serif';
+    // We also can use if() operator with into sass style.
+    content: if($name == "John Doue", "Your name is" + $name, "Your name is not " + $name);
+}
+
+// Now we can update our headings in our main styles.
+h1, h2, h3, h4, h5, h6 {
+    font-family: $base-font-family;
+}
+
+h1 {
+    font-size: base-heading-sizes-cal(1);
+    line-height: base-heading-line-height(1);
+}
+
+h2 {
+    font-size: base-heading-sizes-cal(2);
+    line-height: base-heading-line-height(2);
+}
+
+h3 {
+    font-size: base-heading-sizes-cal(3);
+    line-height: base-heading-line-height(3);
+}
+
+h4 {
+    font-size: base-haading-sizes-cal(4);
+    line-height: base-heading-line-height(4);
+}
+
+h5 {
+    font-size: base-haading-sizes-cal(5);
+    line-height: base-heading-line-height(5);
+}
+
+h6 {
+    font-size: base-haading-sizes-cal(6);
+    line-height: base-heading-line-height(6);
 }

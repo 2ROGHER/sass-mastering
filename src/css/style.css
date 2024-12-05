@@ -1,3 +1,4 @@
+
 *,
 *::before,
 *::after {
@@ -19,8 +20,9 @@ body {
 }
 
 body > div {
-  max-width: 38rem;
+  max-width: 38rem; /* this is aprox. 600px */
   margin: 0;
 }
+
 
 /*# sourceMappingURL=style.css.map */
